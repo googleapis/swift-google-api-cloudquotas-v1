@@ -17,17 +17,15 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Message for getting a QuotaInfo
-public struct GetQuotaInfoRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+/// Request for getting QuotaAdjusterSettings
+public struct GetQuotaAdjusterSettingsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. Identifier. The resource name of the quota info.
-  ///
-  /// An example name:
-  /// `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
+  /// Required. Identifier. Name of the `quotaAdjusterSettings` configuration.
+  /// Only a single setting per project is supported.
   public var name: Swift.String = Swift.String()
 
-  /// Initialize a new instance of `GetQuotaInfoRequest`.
+  /// Initialize a new instance of `GetQuotaAdjusterSettingsRequest`.
   public init() {}
 
   /// Use `config` to return a new instance of this object, with some fields updated.
@@ -35,7 +33,7 @@ public struct GetQuotaInfoRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Commonly used to initialize the value, for example:
   ///
   /// ```
-  /// let value = GetQuotaInfoRequest().with { $0.name = ... }
+  /// let value = GetQuotaAdjusterSettingsRequest().with { $0.name = ... }
   /// ```
   public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
     var copy = self
@@ -44,7 +42,7 @@ public struct GetQuotaInfoRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   }
 
   public static var _anyTypeUrl: Swift.String {
-    return "type.googleapis.com/google.api.cloudquotas.v1.GetQuotaInfoRequest"
+    return "type.googleapis.com/google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)

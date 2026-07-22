@@ -17,75 +17,47 @@
 import Foundation
 import GoogleCloudWkt
 
-/// QuotaInfo represents information about a particular quota for a given
-/// project, folder or organization.
-public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+/// The QuotaAdjusterSettings resource defines the settings for the Quota
+/// Adjuster.
+public struct QuotaAdjusterSettings: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Resource name of this QuotaInfo.
-  /// The ID component following "locations/" must be "global".
-  /// For example,
-  /// `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
+  /// Identifier. Name of the configuration, in the formats below:
+  ///
+  /// * For a project:
+  ///   projects/PROJECT_NUMBER/locations/global/quotaAdjusterSettings
+  /// * For a folder:
+  ///   folders/FOLDER_NUMBER/locations/global/quotaAdjusterSettings
+  /// * For an organization:
+  ///   organizations/ORGANIZATION_NUMBER/locations/global/quotaAdjusterSettings
   public var name: Swift.String = Swift.String()
 
-  /// The id of the quota, which is unique within the service.
-  /// For example, `CpusPerProjectPerRegion`
-  public var quotaId: Swift.String = Swift.String()
+  /// Optional. The configured value of the enablement at the given resource.
+  public var enablement: QuotaAdjusterSettings.Enablement = QuotaAdjusterSettings.Enablement()
 
-  /// The metric of the quota. It specifies the resources consumption the quota
-  /// is defined for.
-  /// For example, `compute.googleapis.com/cpus`
-  public var metric: Swift.String = Swift.String()
+  /// Output only. The timestamp when the QuotaAdjusterSettings resource was last
+  /// updated.
+  public var updateTime: GoogleCloudWkt.Timestamp? = nil
 
-  /// The name of the service in which the quota is defined.
-  /// For example, `compute.googleapis.com`
-  public var service: Swift.String = Swift.String()
+  /// Optional. The current ETag of the QuotaAdjusterSettings. If an ETag is
+  /// provided on update and does not match the current server's ETag in the
+  /// QuotaAdjusterSettings, the request is blocked and returns an ABORTED error.
+  /// See https://google.aip.dev/134#etags for more details on ETags.
+  public var etag: Swift.String = Swift.String()
 
-  /// Whether this is a precise quota. A precise quota is tracked with absolute
-  /// precision. In contrast, an imprecise quota is not tracked with precision.
-  public var isPrecise: Swift.Bool = Swift.Bool()
+  /// Optional. Indicates whether the setting is inherited or explicitly
+  /// specified.
+  public var inherited: Swift.Bool = Swift.Bool()
 
-  /// The reset time interval for the quota. Refresh interval applies to rate
-  /// quota only.
-  /// For example, "minute" for per minute, "day" for per day, or "10 seconds"
-  /// for every 10 seconds.
-  public var refreshInterval: Swift.String = Swift.String()
+  /// Output only. The resource container from which the setting is inherited.
+  /// This refers to the  nearest ancestor with enablement set (either ENABLED or
+  /// DISABLED). The value can be an organizations/{organization_id},
+  /// folders/{folder_id}, or can be 'default' if no ancestor exists with
+  /// enablement set. The value will be empty when enablement is directly set on
+  /// this container.
+  public var inheritedFrom: Swift.String = Swift.String()
 
-  /// The container type of the QuotaInfo.
-  public var containerType: QuotaInfo.ContainerType = QuotaInfo.ContainerType()
-
-  /// The dimensions the quota is defined on.
-  public var dimensions: [Swift.String] = []
-
-  /// The display name of the quota metric
-  public var metricDisplayName: Swift.String = Swift.String()
-
-  /// The display name of the quota.
-  public var quotaDisplayName: Swift.String = Swift.String()
-
-  /// The unit in which the metric value is reported, e.g., "MByte".
-  public var metricUnit: Swift.String = Swift.String()
-
-  /// Whether it is eligible to request a higher quota value for this quota.
-  public var quotaIncreaseEligibility: QuotaIncreaseEligibility? = nil
-
-  /// Whether the quota value is fixed or adjustable
-  public var isFixed: Swift.Bool = Swift.Bool()
-
-  /// The collection of dimensions info ordered by their dimensions from more
-  /// specific ones to less specific ones.
-  public var dimensionsInfos: [DimensionsInfo] = []
-
-  /// Whether the quota is a concurrent quota. Concurrent quotas are enforced
-  /// on the total number of concurrent operations in flight at any given time.
-  public var isConcurrent: Swift.Bool = Swift.Bool()
-
-  /// URI to the page where users can request more quota for the cloud
-  /// service—for example,
-  /// https://console.cloud.google.com/iam-admin/quotas.
-  public var serviceRequestQuotaUri: Swift.String = Swift.String()
-
-  /// Initialize a new instance of `QuotaInfo`.
+  /// Initialize a new instance of `QuotaAdjusterSettings`.
   public init() {}
 
   /// Use `config` to return a new instance of this object, with some fields updated.
@@ -93,7 +65,7 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   /// Commonly used to initialize the value, for example:
   ///
   /// ```
-  /// let value = QuotaInfo().with { $0.name = ... }
+  /// let value = QuotaAdjusterSettings().with { $0.name = ... }
   /// ```
   public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
     var copy = self
@@ -101,16 +73,14 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     return copy
   }
 
-  /// The enumeration of the types of a cloud resource container.
-  public enum ContainerType: Codable, Equatable, Sendable {
-    /// Unspecified container type.
+  /// The enablement status of the quota adjuster.
+  public enum Enablement: Codable, Equatable, Sendable {
+    /// The quota adjuster is in an unknown state.
     case unspecified
-    /// consumer project
-    case project
-    /// folder
-    case folder
-    /// organization
-    case organization
+    /// The quota adjuster is enabled.
+    case enabled
+    /// The quota adjuster is disabled.
+    case disabled
     /// Encodes an unknown integer value.
     ///
     /// The most common cause for an unknown values is for the service to send
@@ -134,9 +104,8 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public var intValue: Int? {
       switch self {
       case .unspecified: return 0
-      case .project: return 1
-      case .folder: return 2
-      case .organization: return 3
+      case .enabled: return 2
+      case .disabled: return 3
       case .unknownIntValue(let v): return v
       case .unknownStringValue: return nil
       }
@@ -147,10 +116,9 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// If the enumeration was initialized with an unknown integer value, this returns `nil`.
     public var stringValue: Swift.String? {
       switch self {
-      case .unspecified: return "CONTAINER_TYPE_UNSPECIFIED"
-      case .project: return "PROJECT"
-      case .folder: return "FOLDER"
-      case .organization: return "ORGANIZATION"
+      case .unspecified: return "ENABLEMENT_UNSPECIFIED"
+      case .enabled: return "ENABLED"
+      case .disabled: return "DISABLED"
       case .unknownIntValue: return nil
       case .unknownStringValue(let v): return v
       }
@@ -161,10 +129,9 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     /// If the value is unknown, this initializes to ``.unknownStringValue(_:)``.
     public init(stringValue: Swift.String) {
       switch stringValue {
-      case "CONTAINER_TYPE_UNSPECIFIED": self = .unspecified
-      case "PROJECT": self = .project
-      case "FOLDER": self = .folder
-      case "ORGANIZATION": self = .organization
+      case "ENABLEMENT_UNSPECIFIED": self = .unspecified
+      case "ENABLED": self = .enabled
+      case "DISABLED": self = .disabled
       default: self = .unknownStringValue(stringValue)
       }
     }
@@ -175,9 +142,8 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
     public init(intValue: Int) {
       switch intValue {
       case 0: self = .unspecified
-      case 1: self = .project
-      case 2: self = .folder
-      case 3: self = .organization
+      case 2: self = .enabled
+      case 3: self = .disabled
       default: self = .unknownIntValue(intValue)
       }
     }
@@ -204,9 +170,8 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
       var container = encoder.singleValueContainer()
       switch self {
       case .unspecified: return try container.encode(0)
-      case .project: return try container.encode(1)
-      case .folder: return try container.encode(2)
-      case .organization: return try container.encode(3)
+      case .enabled: return try container.encode(2)
+      case .disabled: return try container.encode(3)
       case .unknownIntValue(let v): return try container.encode(v)
       case .unknownStringValue(let v): return try container.encode(v)
       }
@@ -214,7 +179,7 @@ public struct QuotaInfo: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   }
 
   public static var _anyTypeUrl: Swift.String {
-    return "type.googleapis.com/google.api.cloudquotas.v1.QuotaInfo"
+    return "type.googleapis.com/google.api.cloudquotas.v1.QuotaAdjusterSettings"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)

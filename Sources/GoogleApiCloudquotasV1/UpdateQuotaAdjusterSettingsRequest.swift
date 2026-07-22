@@ -17,17 +17,22 @@
 import Foundation
 import GoogleCloudWkt
 
-/// Message for getting a QuotaInfo
-public struct GetQuotaInfoRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
+/// Request for updating QuotaAdjusterSettings
+public struct UpdateQuotaAdjusterSettingsRequest: Codable, Equatable, GoogleCloudWkt._AnyPackable,
   Sendable
 {
-  /// Required. Identifier. The resource name of the quota info.
-  ///
-  /// An example name:
-  /// `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
-  public var name: Swift.String = Swift.String()
+  /// Required. The QuotaAdjusterSettings to update.
+  public var quotaAdjusterSettings: QuotaAdjusterSettings? = nil
 
-  /// Initialize a new instance of `GetQuotaInfoRequest`.
+  /// Optional. The list of fields to update.
+  public var updateMask: GoogleCloudWkt.FieldMask? = nil
+
+  /// Optional. If set to true, checks the syntax of the request but doesn't
+  /// update the quota adjuster settings value. Note that although a request can
+  /// be valid, that doesn't guarantee that the request will be fulfilled.
+  public var validateOnly: Swift.Bool = Swift.Bool()
+
+  /// Initialize a new instance of `UpdateQuotaAdjusterSettingsRequest`.
   public init() {}
 
   /// Use `config` to return a new instance of this object, with some fields updated.
@@ -35,7 +40,7 @@ public struct GetQuotaInfoRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   /// Commonly used to initialize the value, for example:
   ///
   /// ```
-  /// let value = GetQuotaInfoRequest().with { $0.name = ... }
+  /// let value = UpdateQuotaAdjusterSettingsRequest().with { $0.quotaAdjusterSettings = ... }
   /// ```
   public func with(_ config: (inout Self) throws -> Swift.Void) rethrows -> Self {
     var copy = self
@@ -44,7 +49,7 @@ public struct GetQuotaInfoRequest: Codable, Equatable, GoogleCloudWkt._AnyPackab
   }
 
   public static var _anyTypeUrl: Swift.String {
-    return "type.googleapis.com/google.api.cloudquotas.v1.GetQuotaInfoRequest"
+    return "type.googleapis.com/google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest"
   }
   public init(fromAny any: GoogleCloudWkt.`Any`) throws {
     self = try GoogleCloudWkt._slowAnyDeserialize(Self.self, from: any)
