@@ -25,11 +25,11 @@ extension Clients {
   protocol QuotaAdjusterSettingsManagerStub {
     func updateQuotaAdjusterSettings(
       request: UpdateQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaAdjusterSettings
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
 
     func getQuotaAdjusterSettings(
       request: GetQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaAdjusterSettings
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
   }
 
   class QuotaAdjusterSettingsManagerTransport: QuotaAdjusterSettingsManagerStub {
@@ -42,7 +42,7 @@ extension Clients {
 
     public func updateQuotaAdjusterSettings(
       request: UpdateQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaAdjusterSettings {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.quotaAdjusterSettings.map({ $0.name }),
           !pathVariable0.isEmpty
@@ -67,12 +67,12 @@ extension Clients {
       }
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.QuotaAdjusterSettings.self, from: data)
+        GoogleApiCloudQuotasV1.QuotaAdjusterSettings.self, from: data)
     }
 
     public func getQuotaAdjusterSettings(
       request: GetQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaAdjusterSettings {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -87,7 +87,7 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.QuotaAdjusterSettings.self, from: data)
+        GoogleApiCloudQuotasV1.QuotaAdjusterSettings.self, from: data)
     }
   }
 }

@@ -20,52 +20,46 @@ import Foundation
 #endif
 import GoogleCloudWkt
 import GoogleCloudGax
-import struct Logging.Logger
 
 extension Clients {
-  final class QuotaAdjusterSettingsManagerLogging: QuotaAdjusterSettingsManagerStub {
+  final class QuotaAdjusterSettingsManagerRetry: QuotaAdjusterSettingsManagerStub {
     let inner: any QuotaAdjusterSettingsManagerStub
-    let logger: Logger
+    let options: GoogleCloudGax.ClientOptions
 
-    public init(_ inner: any QuotaAdjusterSettingsManagerStub, logger: Logger) {
-      var logger = logger
-      logger[metadataKey: "gcp.artifact.id"] = "google-api-cloudquotas-v1"
-      logger[metadataKey: "gcp.client.service"] = "cloudquotas"
-      logger[metadataKey: "gcp.experimental.swift.client"] = "QuotaAdjusterSettingsManager"
+    public init(
+      _ inner: any QuotaAdjusterSettingsManagerStub, options: GoogleCloudGax.ClientOptions
+    ) {
       self.inner = inner
-      self.logger = logger
+      self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
       options: GoogleCloudGax.RequestOptions,
-      name: Swift.String,
+      idempotent: Swift.Bool,
       action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      var logger = logger
-      logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
-      logger[metadataKey: "gcp.experimental.swift.method"] = .string(name)
-      logger.debug("enter  : \(request) \(options)")
-      do {
-        let output = try await action(request, options)
-        logger.debug("success: \(request) \(options) \(output)")
-        return output
-      } catch let error {
-        logger.debug("error  : \(request) \(options) \(error)")
-        throw error
+      let loop = GoogleCloudGax._RetryLoop(
+        options: options, withDefault: self.options, idempotent: idempotent,
+      )
+      let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
+        var attemptOptions = options
+        attemptOptions.attemptTimeout = attemptTimeout
+        return try await action(request, attemptOptions)
       }
+      return try await loop.run(attempt: attempt)
     }
 
     public func updateQuotaAdjusterSettings(
       request: UpdateQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaAdjusterSettings {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings {
       try await self._intercept(
         request: request,
         options: options,
-        name: "updateQuotaAdjusterSettings",
+        idempotent: false,
         action: {
           (r: UpdateQuotaAdjusterSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiCloudquotasV1.QuotaAdjusterSettings
+            -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
           in
           return try await self.inner.updateQuotaAdjusterSettings(request: r, options: o)
         })
@@ -73,14 +67,14 @@ extension Clients {
 
     public func getQuotaAdjusterSettings(
       request: GetQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaAdjusterSettings {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings {
       try await self._intercept(
         request: request,
         options: options,
-        name: "getQuotaAdjusterSettings",
+        idempotent: true,
         action: {
           (r: GetQuotaAdjusterSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiCloudquotasV1.QuotaAdjusterSettings
+            -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
           in
           return try await self.inner.getQuotaAdjusterSettings(request: r, options: o)
         })

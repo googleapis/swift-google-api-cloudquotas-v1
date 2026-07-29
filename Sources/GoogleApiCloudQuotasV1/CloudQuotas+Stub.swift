@@ -25,27 +25,27 @@ extension Clients {
   protocol CloudQuotasStub {
     func listQuotaInfos(
       request: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse
+    ) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse
 
     func getQuotaInfo(
       request: GetQuotaInfoRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaInfo
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo
 
     func listQuotaPreferences(
       request: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse
+    ) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse
 
     func getQuotaPreference(
       request: GetQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     func createQuotaPreference(
       request: CreateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     func updateQuotaPreference(
       request: UpdateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
   }
 
   class CloudQuotasTransport: CloudQuotasStub {
@@ -58,7 +58,7 @@ extension Clients {
 
     public func listQuotaInfos(
       request: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse {
+    ) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -76,12 +76,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.ListQuotaInfosResponse.self, from: data)
+        GoogleApiCloudQuotasV1.ListQuotaInfosResponse.self, from: data)
     }
 
     public func getQuotaInfo(
       request: GetQuotaInfoRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaInfo {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -96,12 +96,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.QuotaInfo.self, from: data)
+        GoogleApiCloudQuotasV1.QuotaInfo.self, from: data)
     }
 
     public func listQuotaPreferences(
       request: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse {
+    ) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -121,12 +121,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.ListQuotaPreferencesResponse.self, from: data)
+        GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse.self, from: data)
     }
 
     public func getQuotaPreference(
       request: GetQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.name as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.name' is not set or is empty")
@@ -141,12 +141,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.QuotaPreference.self, from: data)
+        GoogleApiCloudQuotasV1.QuotaPreference.self, from: data)
     }
 
     public func createQuotaPreference(
       request: CreateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.parent as Swift.String?, !pathVariable0.isEmpty else {
           throw GoogleCloudGax.RequestError.binding("'request.parent' is not set or is empty")
@@ -170,12 +170,12 @@ extension Clients {
       }
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.QuotaPreference.self, from: data)
+        GoogleApiCloudQuotasV1.QuotaPreference.self, from: data)
     }
 
     public func updateQuotaPreference(
       request: UpdateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.quotaPreference.map({ $0.name }), !pathVariable0.isEmpty
         else {
@@ -202,7 +202,7 @@ extension Clients {
       }
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiCloudquotasV1.QuotaPreference.self, from: data)
+        GoogleApiCloudQuotasV1.QuotaPreference.self, from: data)
     }
   }
 }

@@ -48,7 +48,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
   /// @Snippet(path: "CloudQuotas_ListQuotaInfos")
   public func listQuotaInfos(
     request: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse {
+  ) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse {
     try await self.inner.listQuotaInfos(request: request, options: options)
   }
 
@@ -59,7 +59,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
     byItem: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaInfo, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse in
+      (token: Swift.String) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listQuotaInfos(request: request, options: options)
@@ -72,7 +72,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
   /// @Snippet(path: "CloudQuotas_GetQuotaInfo")
   public func getQuotaInfo(
     request: GetQuotaInfoRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaInfo {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo {
     try await self.inner.getQuotaInfo(request: request, options: options)
   }
 
@@ -81,7 +81,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
   /// @Snippet(path: "CloudQuotas_ListQuotaPreferences")
   public func listQuotaPreferences(
     request: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse {
+  ) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse {
     try await self.inner.listQuotaPreferences(request: request, options: options)
   }
 
@@ -92,7 +92,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
     byItem: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaPreference, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse in
+      (token: Swift.String) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listQuotaPreferences(request: request, options: options)
@@ -105,7 +105,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
   /// @Snippet(path: "CloudQuotas_GetQuotaPreference")
   public func getQuotaPreference(
     request: GetQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     try await self.inner.getQuotaPreference(request: request, options: options)
   }
 
@@ -114,7 +114,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
   /// @Snippet(path: "CloudQuotas_CreateQuotaPreference")
   public func createQuotaPreference(
     request: CreateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     try await self.inner.createQuotaPreference(request: request, options: options)
   }
 
@@ -124,7 +124,7 @@ public class CloudQuotasClient: Clients.CloudQuotasProtocol {
   /// @Snippet(path: "CloudQuotas_UpdateQuotaPreference")
   public func updateQuotaPreference(
     request: UpdateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     try await self.inner.updateQuotaPreference(request: request, options: options)
   }
 }
@@ -138,7 +138,7 @@ extension Clients {
   public protocol CloudQuotasProtocol {
     /// See `CloudQuotasClient.listQuotaInfos`.
     func listQuotaInfos(request: ListQuotaInfosRequest) async throws
-      -> GoogleApiCloudquotasV1.ListQuotaInfosResponse
+      -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse
 
     /// See `CloudQuotasClient.listQuotaInfos`.
     func listQuotaInfos(
@@ -151,16 +151,16 @@ extension Clients {
     ) throws -> any AsyncSequence<QuotaInfo, Swift.Error>
 
     /// See `CloudQuotasClient.getQuotaInfo`.
-    func getQuotaInfo(request: GetQuotaInfoRequest) async throws -> GoogleApiCloudquotasV1.QuotaInfo
+    func getQuotaInfo(request: GetQuotaInfoRequest) async throws -> GoogleApiCloudQuotasV1.QuotaInfo
 
     /// See `CloudQuotasClient.getQuotaInfo`.
     func getQuotaInfo(
       name: Swift.String,
-    ) async throws -> GoogleApiCloudquotasV1.QuotaInfo
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo
 
     /// See `CloudQuotasClient.listQuotaPreferences`.
     func listQuotaPreferences(request: ListQuotaPreferencesRequest) async throws
-      -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse
+      -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse
 
     /// See `CloudQuotasClient.listQuotaPreferences`.
     func listQuotaPreferences(
@@ -174,44 +174,44 @@ extension Clients {
 
     /// See `CloudQuotasClient.getQuotaPreference`.
     func getQuotaPreference(request: GetQuotaPreferenceRequest) async throws
-      -> GoogleApiCloudquotasV1.QuotaPreference
+      -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.getQuotaPreference`.
     func getQuotaPreference(
       name: Swift.String,
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.createQuotaPreference`.
     func createQuotaPreference(request: CreateQuotaPreferenceRequest) async throws
-      -> GoogleApiCloudquotasV1.QuotaPreference
+      -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.createQuotaPreference`.
     func createQuotaPreference(
       parent: Swift.String,
       quotaPreference: QuotaPreference?,
       quotaPreferenceId: Swift.String,
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.createQuotaPreference`.
     func createQuotaPreference(
       parent: Swift.String,
       quotaPreference: QuotaPreference?,
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.updateQuotaPreference`.
     func updateQuotaPreference(request: UpdateQuotaPreferenceRequest) async throws
-      -> GoogleApiCloudquotasV1.QuotaPreference
+      -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.updateQuotaPreference`.
     func updateQuotaPreference(
       quotaPreference: QuotaPreference?,
       updateMask: GoogleCloudWkt.FieldMask?,
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.listQuotaInfos`.
     func listQuotaInfos(
       request: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse
+    ) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse
 
     /// See `CloudQuotasClient.listQuotaInfos`.
     func listQuotaInfos(
@@ -221,12 +221,12 @@ extension Clients {
     /// See `CloudQuotasClient.getQuotaInfo`.
     func getQuotaInfo(
       request: GetQuotaInfoRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaInfo
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo
 
     /// See `CloudQuotasClient.listQuotaPreferences`.
     func listQuotaPreferences(
       request: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse
+    ) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse
 
     /// See `CloudQuotasClient.listQuotaPreferences`.
     func listQuotaPreferences(
@@ -236,31 +236,31 @@ extension Clients {
     /// See `CloudQuotasClient.getQuotaPreference`.
     func getQuotaPreference(
       request: GetQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.createQuotaPreference`.
     func createQuotaPreference(
       request: CreateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     /// See `CloudQuotasClient.updateQuotaPreference`.
     func updateQuotaPreference(
       request: UpdateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiCloudquotasV1.QuotaPreference
+    ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
   }
 }
 
 // Default implementations
 extension Clients.CloudQuotasProtocol {
   public func listQuotaInfos(request: ListQuotaInfosRequest) async throws
-    -> GoogleApiCloudquotasV1.ListQuotaInfosResponse
+    -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse
   {
     try await self.listQuotaInfos(request: request, options: .init())
   }
 
   public func listQuotaInfos(
     request: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse {
+  ) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -274,7 +274,7 @@ extension Clients.CloudQuotasProtocol {
     byItem: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaInfo, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaInfosResponse in
+      (token: Swift.String) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -290,20 +290,20 @@ extension Clients.CloudQuotasProtocol {
   }
 
   public func getQuotaInfo(request: GetQuotaInfoRequest) async throws
-    -> GoogleApiCloudquotasV1.QuotaInfo
+    -> GoogleApiCloudQuotasV1.QuotaInfo
   {
     try await self.getQuotaInfo(request: request, options: .init())
   }
 
   public func getQuotaInfo(
     request: GetQuotaInfoRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaInfo {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func getQuotaInfo(
     name: Swift.String,
-  ) async throws -> GoogleApiCloudquotasV1.QuotaInfo {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo {
     let request = GetQuotaInfoRequest().with {
       $0.name = name
     }
@@ -311,14 +311,14 @@ extension Clients.CloudQuotasProtocol {
   }
 
   public func listQuotaPreferences(request: ListQuotaPreferencesRequest) async throws
-    -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse
+    -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse
   {
     try await self.listQuotaPreferences(request: request, options: .init())
   }
 
   public func listQuotaPreferences(
     request: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse {
+  ) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -332,7 +332,7 @@ extension Clients.CloudQuotasProtocol {
     byItem: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<QuotaPreference, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiCloudquotasV1.ListQuotaPreferencesResponse in
+      (token: Swift.String) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -348,20 +348,20 @@ extension Clients.CloudQuotasProtocol {
   }
 
   public func getQuotaPreference(request: GetQuotaPreferenceRequest) async throws
-    -> GoogleApiCloudquotasV1.QuotaPreference
+    -> GoogleApiCloudQuotasV1.QuotaPreference
   {
     try await self.getQuotaPreference(request: request, options: .init())
   }
 
   public func getQuotaPreference(
     request: GetQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func getQuotaPreference(
     name: Swift.String,
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     let request = GetQuotaPreferenceRequest().with {
       $0.name = name
     }
@@ -369,14 +369,14 @@ extension Clients.CloudQuotasProtocol {
   }
 
   public func createQuotaPreference(request: CreateQuotaPreferenceRequest) async throws
-    -> GoogleApiCloudquotasV1.QuotaPreference
+    -> GoogleApiCloudQuotasV1.QuotaPreference
   {
     try await self.createQuotaPreference(request: request, options: .init())
   }
 
   public func createQuotaPreference(
     request: CreateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -384,7 +384,7 @@ extension Clients.CloudQuotasProtocol {
     parent: Swift.String,
     quotaPreference: QuotaPreference?,
     quotaPreferenceId: Swift.String,
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     let request = CreateQuotaPreferenceRequest().with {
       $0.parent = parent
       $0.quotaPreference = quotaPreference
@@ -396,7 +396,7 @@ extension Clients.CloudQuotasProtocol {
   public func createQuotaPreference(
     parent: Swift.String,
     quotaPreference: QuotaPreference?,
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     let request = CreateQuotaPreferenceRequest().with {
       $0.parent = parent
       $0.quotaPreference = quotaPreference
@@ -405,21 +405,21 @@ extension Clients.CloudQuotasProtocol {
   }
 
   public func updateQuotaPreference(request: UpdateQuotaPreferenceRequest) async throws
-    -> GoogleApiCloudquotasV1.QuotaPreference
+    -> GoogleApiCloudQuotasV1.QuotaPreference
   {
     try await self.updateQuotaPreference(request: request, options: .init())
   }
 
   public func updateQuotaPreference(
     request: UpdateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func updateQuotaPreference(
     quotaPreference: QuotaPreference?,
     updateMask: GoogleCloudWkt.FieldMask?,
-  ) async throws -> GoogleApiCloudquotasV1.QuotaPreference {
+  ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
     let request = UpdateQuotaPreferenceRequest().with {
       $0.quotaPreference = quotaPreference
       $0.updateMask = updateMask
